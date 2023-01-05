@@ -1,4 +1,4 @@
-from  customers.models import Customer
+from customers.models import Customer
 from django.http import JsonResponse
 from customers.serializers import CustomerSerializer
 
@@ -10,6 +10,6 @@ def customers(request):
 
 #this will get individual customer details per id
 def customer(request, id):
-    data = Customer.objects.get(id)
+    data = Customer.objects.get(pk=id)
     serializer = CustomerSerializer(data)
     return JsonResponse({'customer': serializer.data})
