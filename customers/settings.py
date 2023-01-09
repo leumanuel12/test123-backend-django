@@ -54,6 +54,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',)
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ROTATE_REFRESH_TOKENS': True, #from false to true
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=20), #set token duration of refresh
+}
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'
 ]

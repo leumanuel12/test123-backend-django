@@ -1,13 +1,15 @@
 from customers.models import Customer
 from django.http import JsonResponse, Http404
 from customers.serializers import CustomerSerializer
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 
 # this will get all customers and details
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
 def customers(request):
     if request.method == 'GET':
         data = Customer.objects.all()
@@ -24,6 +26,7 @@ def customers(request):
 
 # this will get individual customer details per id
 @api_view(['GET', 'POST', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def customer(request, id):
     # data = Customer.objects.get(pk=id)
     # adding exception to throw 404
